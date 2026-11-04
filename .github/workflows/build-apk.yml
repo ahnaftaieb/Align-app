@@ -32,14 +32,10 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Setup Gradle 9.3.1
-        uses: gradle/actions/setup-gradle@v4
+      - name: Setup Android SDK (API 36)
+        uses: android-actions/setup-android@v4
         with:
-          gradle-version: '9.3.1'
-
-      - name: Accept Android SDK Licenses
-        run: |
-          yes | sdkmanager --licenses || true
+          packages: 'platforms;android-36 platform-tools'
 
       - name: Restore Debug Keystore and Env
         run: |
@@ -47,9 +43,10 @@ jobs:
           if [ -f "debug.keystore.base64" ]; then
             base64 -d debug.keystore.base64 > debug.keystore
           fi
+          chmod +x gradlew
 
-      - name: Build Debug APK
-        run: gradle assembleDebug --stacktrace
+      - name: Build Debug APK with Gradle Wrapper
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Upload APK as Workflow Artifact
         uses: actions/upload-artifact@v4
