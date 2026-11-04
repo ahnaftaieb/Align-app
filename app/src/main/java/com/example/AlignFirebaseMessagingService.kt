@@ -6,6 +6,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
@@ -52,13 +53,24 @@ class AlignFirebaseMessagingService : FirebaseMessagingService() {
             CHANNEL_UPDATES
         }
 
-        sendNotification(title, body, channelId)
+        val targetUrl = remoteMessage.data["url"]
+            ?: remoteMessage.data["update_url"]
+            ?: remoteMessage.data["link"]
+
+        sendNotification(title, body, channelId, targetUrl)
     }
 
-    private fun sendNotification(title: String, messageBody: String, channelId: String) {
-        val intent = Intent(this, MainActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+    private fun sendNotification(title: String, messageBody: String, channelId: String, targetUrl: String? = null) {
+        val intent = if (!targetUrl.isNullOrBlank()) {
+            Intent(Intent.ACTION_VIEW, Uri.parse(targetUrl)).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+        } else {
+            Intent(this, MainActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            }
         }
+
         val pendingIntent = PendingIntent.getActivity(
             this,
             System.currentTimeMillis().toInt(),
@@ -76,6 +88,23 @@ class AlignFirebaseMessagingService : FirebaseMessagingService() {
             .setSound(defaultSoundUri)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
+
+        if (!targetUrl.isNullOrBlank()) {
+            val downloadIntent = Intent(Intent.ACTION_VIEW, Uri.parse(targetUrl)).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            val downloadPendingIntent = PendingIntent.getActivity(
+                this,
+                (System.currentTimeMillis() + 1).toInt(),
+                downloadIntent,
+                PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE
+            )
+            notificationBuilder.addAction(
+                R.mipmap.ic_launcher,
+                "Download Update",
+                downloadPendingIntent
+            )
+        }
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 

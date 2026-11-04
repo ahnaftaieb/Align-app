@@ -229,20 +229,21 @@ class MainActivity : ComponentActivity() {
 
     fun fetchAndSyncFcmToken() {
         try {
-            com.google.firebase.messaging.FirebaseMessaging.getInstance().token
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        val token = task.result
-                        val prefs = getSharedPreferences(AlignFirebaseMessagingService.PREFS_NAME, Context.MODE_PRIVATE)
-                        prefs.edit().putString(AlignFirebaseMessagingService.KEY_FCM_TOKEN, token).apply()
-                        activeWebView?.post {
-                            activeWebView?.evaluateJavascript(
-                                "if (typeof onFcmTokenReceived === 'function') { onFcmTokenReceived('$token'); }",
-                                null
-                            )
-                        }
+            val fcm = com.google.firebase.messaging.FirebaseMessaging.getInstance()
+            fcm.subscribeToTopic("all")
+            fcm.token.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val token = task.result
+                    val prefs = getSharedPreferences(AlignFirebaseMessagingService.PREFS_NAME, Context.MODE_PRIVATE)
+                    prefs.edit().putString(AlignFirebaseMessagingService.KEY_FCM_TOKEN, token).apply()
+                    activeWebView?.post {
+                        activeWebView?.evaluateJavascript(
+                            "if (typeof onFcmTokenReceived === 'function') { onFcmTokenReceived('$token'); }",
+                            null
+                        )
                     }
                 }
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -567,6 +568,17 @@ class WebAppInterface(
             e.printStackTrace()
         }
     }
+
+    @JavascriptInterface
+    fun openExternalUrl(url: String) {
+        try {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 }
 
 @Composable
@@ -580,6 +592,23 @@ fun WebViewScreen(
             WebView(context).apply {
                 onWebViewCreated(this)
                 webViewClient = object : WebViewClient() {
+                    override fun shouldOverrideUrlLoading(view: WebView?, request: android.webkit.WebResourceRequest?): Boolean {
+                        val url = request?.url?.toString() ?: return false
+                        if (url.startsWith("http://") || url.startsWith("https://")) {
+                            if (!url.contains("localhost") && !url.contains("127.0.0.1")) {
+                                try {
+                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    context.startActivity(intent)
+                                    return true
+                                } catch (e: Exception) {
+                                    e.printStackTrace()
+                                }
+                            }
+                        }
+                        return false
+                    }
+
                     override fun onReceivedError(
                         view: WebView?,
                         request: android.webkit.WebResourceRequest?,

@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
-  "updated_at": "2026-11-03",
+  "version": "1.0.1",
+  "updated_at": "2026-11-04",
   "broadcast": {
     "id": "align-broadcast-001",
     "enabled": true,

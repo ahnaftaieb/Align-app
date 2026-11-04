@@ -4654,6 +4654,61 @@
         </div>
       </div>
 
+      <!-- Developer Contact & GitHub Repository Card -->
+      <div class="settings-card" style="margin-top: 16px; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 16px; padding: 20px; transition: all 0.2s ease; margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <h3 style="font-size: 14px; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.5px; margin: 0; display: flex; align-items: center; gap: 8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            Contact Developer & GitHub
+          </h3>
+          <button type="button" onclick="toggleEditDeveloperContact()" style="background: none; border: none; color: var(--color-purple); font-size: 11px; font-weight: 700; cursor: pointer; padding: 4px 6px;">
+            Edit Info
+          </button>
+        </div>
+        <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 14px;">
+          Have questions, suggestions, or want to contribute? Connect directly with the developer or explore the repository.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <!-- WhatsApp Contact Button -->
+          <button type="button" onclick="openWhatsAppContact()" style="width: 100%; padding: 12px 14px; background: rgba(37, 211, 102, 0.12); border: 1px solid rgba(37, 211, 102, 0.35); color: #25D366; font-size: 13px; font-weight: 700; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: all 0.2s;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.04 7.58C8.84 7.58 8.5 7.66 8.23 7.95C7.95 8.25 7.18 8.97 7.18 10.45C7.18 11.92 8.25 13.34 8.4 13.54C8.55 13.74 10.45 16.82 13.43 18C15.89 19 16.39 18.8 16.93 18.75C17.47 18.7 18.66 18.04 18.91 17.34C19.16 16.64 19.16 16.04 19.08 15.92C19 15.8 18.67 15.72 18.17 15.47C17.67 15.22 15.22 14.02 14.77 13.85C14.31 13.69 13.98 13.61 13.65 14.1C13.32 14.6 12.38 15.72 12.09 16.05C11.8 16.38 11.51 16.42 11.01 16.17C10.51 15.92 8.91 15.4 7.02 13.71C5.54 12.4 4.54 10.77 4.25 10.28C3.96 9.79 4.22 9.52 4.47 9.27C4.69 9.05 4.97 8.68 5.22 8.39C5.47 8.1 5.55 7.89 5.72 7.56C5.89 7.23 5.8 6.94 5.68 6.69C5.55 6.44 4.65 4.24 4.28 3.35"/>
+              </svg>
+              <span>Message on WhatsApp</span>
+            </div>
+            <span style="font-size: 11px; opacity: 0.85;">Chat Now →</span>
+          </button>
+
+          <!-- GitHub Repository Button -->
+          <button type="button" onclick="openGitHubRepo()" style="width: 100%; padding: 12px 14px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border-light); color: var(--text-primary); font-size: 13px; font-weight: 700; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: all 0.2s;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017C2 16.442 4.87 20.197 8.84 21.52C9.34 21.61 9.52 21.3 9.52 21.03C9.52 20.79 9.51 19.99 9.51 19.14C6.73 19.74 6.14 17.8 6.14 17.8C5.68 16.65 5.03 16.34 5.03 16.34C4.12 15.72 5.1 15.73 5.1 15.73C6.1 15.8 6.63 16.76 6.63 16.76C7.52 18.29 8.97 17.85 9.54 17.59C9.63 16.94 9.89 16.5 10.17 16.25C7.95 16 5.62 15.14 5.62 11.31C5.62 10.22 6.01 9.32 6.65 8.62C6.55 8.37 6.2 7.35 6.75 6C6.75 6 7.59 5.73 9.5 7.02C10.3 6.8 11.15 6.69 12 6.69C12.85 6.69 13.7 6.8 14.5 7.02C16.41 5.73 17.25 6 17.25 6C17.8 7.35 17.45 8.37 17.35 8.62C17.99 9.32 18.38 10.22 18.38 11.31C18.38 15.15 16.04 15.99 13.81 16.24C14.17 16.55 14.49 17.17 14.49 18.12C14.49 19.48 14.48 20.58 14.48 20.91C14.48 21.19 14.66 21.51 15.17 21.41C19.14 20.08 22 16.34 22 11.91C22 6.484 17.52 2 12 2Z"/>
+              </svg>
+              <span>GitHub Repository</span>
+            </div>
+            <span style="font-size: 11px; opacity: 0.85;">Releases & Code →</span>
+          </button>
+        </div>
+
+        <!-- In-line Info Editor -->
+        <div id="developer-contact-editor" style="display: none; padding-top: 14px; border-top: 1px solid var(--border-light); margin-top: 12px;">
+          <div style="font-size: 12px; font-weight: 700; color: var(--text-primary); margin-bottom: 8px;">Configure Contact Links</div>
+          <label style="font-size: 11px; font-weight: 600; color: var(--text-secondary); display: block; margin-bottom: 4px;">WhatsApp Number (with country code):</label>
+          <input type="text" id="input-dev-whatsapp" value="+8801716259459" placeholder="+8801716259459" style="width: 100%; padding: 8px 12px; background: rgba(0,0,0,0.25); border: 1px solid var(--border-light); border-radius: 8px; color: var(--text-primary); font-size: 12px; margin-bottom: 10px; box-sizing: border-box;">
+          
+          <label style="font-size: 11px; font-weight: 600; color: var(--text-secondary); display: block; margin-bottom: 4px;">GitHub Repository Link or username/repo:</label>
+          <input type="text" id="input-dev-github-repo" value="https://github.com/ahnaftaieb/Align-app" placeholder="https://github.com/ahnaftaieb/Align-app" style="width: 100%; padding: 8px 12px; background: rgba(0,0,0,0.25); border: 1px solid var(--border-light); border-radius: 8px; color: var(--text-primary); font-size: 12px; margin-bottom: 12px; box-sizing: border-box;">
+          
+          <button type="button" onclick="saveDeveloperContactSettings()" style="width: 100%; padding: 9px; background: var(--color-purple); border: none; border-radius: 8px; color: #fff; font-size: 12px; font-weight: 700; cursor: pointer;">
+            Save Details
+          </button>
+        </div>
+      </div>
 
     </div>
 
@@ -5312,7 +5367,7 @@
       justCompletedHabitId: null,
       calendarDialMode: localStorage.getItem('align_calendar_dial_mode') || 'tumbler',
       dhikrCounts: JSON.parse(localStorage.getItem('align_dhikr_counts') || '{"subhanallah":0,"alhamdulillah":0,"allahuakbar":0}'),
-      githubBroadcastRepo: localStorage.getItem('hs_github_broadcast_repo') || '',
+      githubBroadcastRepo: localStorage.getItem('hs_github_broadcast_repo') || 'ahnaftaieb/Align-app',
       githubBroadcastEnabled: localStorage.getItem('hs_github_broadcast_enabled') !== 'false',
       dismissedBroadcastIds: JSON.parse(localStorage.getItem('hs_dismissed_broadcasts') || '[]'),
       currentBroadcast: null
@@ -9421,10 +9476,14 @@
       if (b.action_tab) {
         changeTab(b.action_tab);
       } else if (b.action_url) {
-        try {
-          window.open(b.action_url, '_blank');
-        } catch (e) {
-          window.location.href = b.action_url;
+        if (window.Android && typeof window.Android.openExternalUrl === 'function') {
+          window.Android.openExternalUrl(b.action_url);
+        } else {
+          try {
+            window.open(b.action_url, '_blank');
+          } catch (e) {
+            window.location.href = b.action_url;
+          }
         }
       }
     }
@@ -9548,6 +9607,64 @@
           showSalatToast('No broadcast found');
         }
         updateBroadcastStatusLabel('Status: No broadcast active');
+      }
+    }
+
+    function openWhatsAppContact() {
+      let phone = localStorage.getItem('hs_dev_whatsapp') || '+8801716259459';
+      const cleanPhone = phone.replace(/[^0-9]/g, '');
+      const url = `https://wa.me/${cleanPhone}?text=${encodeURIComponent('Hello! I am reaching out regarding the Align app.')}`;
+      openExternalDirect(url);
+    }
+
+    function openGitHubRepo() {
+      let repo = localStorage.getItem('hs_dev_github_repo') || State.githubBroadcastRepo || 'ahnaftaieb/Align-app';
+      let cleanRepo = repo.replace(/^https?:\/\/github\.com\//, '');
+      let url = `https://github.com/${cleanRepo}`;
+      openExternalDirect(url);
+    }
+
+    function toggleEditDeveloperContact() {
+      const editor = document.getElementById('developer-contact-editor');
+      if (editor) {
+        const isHidden = editor.style.display === 'none';
+        editor.style.display = isHidden ? 'block' : 'none';
+        if (isHidden) {
+          const phoneInput = document.getElementById('input-dev-whatsapp');
+          const repoInput = document.getElementById('input-dev-github-repo');
+          if (phoneInput) phoneInput.value = localStorage.getItem('hs_dev_whatsapp') || '+8801716259459';
+          if (repoInput) repoInput.value = localStorage.getItem('hs_dev_github_repo') || State.githubBroadcastRepo || 'https://github.com/ahnaftaieb/Align-app';
+        }
+      }
+    }
+
+    function saveDeveloperContactSettings() {
+      const phoneInput = document.getElementById('input-dev-whatsapp');
+      const repoInput = document.getElementById('input-dev-github-repo');
+      if (phoneInput) {
+        localStorage.setItem('hs_dev_whatsapp', phoneInput.value.trim());
+      }
+      if (repoInput) {
+        let cleanRepo = repoInput.value.trim().replace(/^https?:\/\/github\.com\//, '');
+        localStorage.setItem('hs_dev_github_repo', cleanRepo);
+        State.githubBroadcastRepo = cleanRepo;
+        localStorage.setItem('hs_github_broadcast_repo', cleanRepo);
+      }
+      const editor = document.getElementById('developer-contact-editor');
+      if (editor) editor.style.display = 'none';
+      showSalatToast('Contact details saved!');
+    }
+
+    function openExternalDirect(url) {
+      if (!url) return;
+      if (window.Android && typeof window.Android.openExternalUrl === 'function') {
+        window.Android.openExternalUrl(url);
+      } else {
+        try {
+          window.open(url, '_blank');
+        } catch (e) {
+          window.location.href = url;
+        }
       }
     }
 
