@@ -1,10 +1,10 @@
 {
   "version": "1.0.0",
-  "updated_at": "2026-11-03",
+  "updated_at": "2026-11-04",
   "broadcast": {
     "id": "align-broadcast-003",
     "enabled": true,
-    "badge": "Daily Reflection",
+    "badge": "Welcome",
     "title": "Consistency in Small Steps",
     "message": "There is a new update availabe",
     "action_label": "Open Salat Matrix",
@@ -15,7 +15,7 @@
   "announcements": [
     {
       "id": "announcement-welcome",
-      "date": "2026-11-03",
+      "date": "2026-11-04",
       "title": "Welcome to Align v1.0",
       "body": "Track your 5 daily prayers, deep focus sessions, and daily habits with offline privacy and continuous streak protection."
     }
