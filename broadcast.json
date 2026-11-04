@@ -2,11 +2,11 @@
   "version": "1.0.0",
   "updated_at": "2026-11-03",
   "broadcast": {
-    "id": "align-broadcast-002",
+    "id": "align-broadcast-003",
     "enabled": true,
     "badge": "Daily Reflection",
     "title": "Consistency in Small Steps",
-    "message": "The most beloved deeds to Allah are those that are consistent, even if they are small. (Sahih al-Bukhari 6465)",
+    "message": "There is a new update availabe",
     "action_label": "Open Salat Matrix",
     "action_tab": "salat",
     "action_url": "",
