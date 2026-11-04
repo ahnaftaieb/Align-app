@@ -24,11 +24,10 @@
 
 - **Deep Focus Telemetry**:
   - Focus sprint timer with interval options (25m, 45m, 90m, or custom).
-  - Ambient audio soundscapes (Binaural 40Hz, Deep Brown Noise, Gentle Rain).
   - Real-time weekly progress bar toward custom hourly goals.
 
 - **Curriculum & Academy Modules**:
-  - Structured modules with lesson completion tracking and reflection notes.
+  - Structured modules with lesson completion tracking.
 
 - **Offline-First & Cloud Sync**:
   - 100% private and works completely offline with local storage.
