@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "updated_at": "2026-11-03",
+  "broadcast": {
+    "id": "align-broadcast-001",
+    "enabled": true,
+    "badge": "Daily Reflection",
+    "title": "Consistency in Small Steps",
+    "message": "The most beloved deeds to Allah are those that are consistent, even if they are small. (Sahih al-Bukhari 6465)",
+    "action_label": "Open Salat Matrix",
+    "action_tab": "salat",
+    "action_url": "",
+    "priority": "normal"
+  },
+  "announcements": [
+    {
+      "id": "announcement-welcome",
+      "date": "2026-11-03",
+      "title": "Welcome to Align v1.0",
+      "body": "Track your 5 daily prayers, deep focus sessions, and daily habits with offline privacy and continuous streak protection."
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Align",
+  "description": "Align - Daily habit tracking, deep focus zone timer, academy course modules, and prayer logging.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
