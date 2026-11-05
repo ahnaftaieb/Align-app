@@ -1,6 +1,6 @@
 # Align — Habit, Deep Focus & Salat Tracker
 
-**Align** is a mindful daily companion designed to help users build meaningful daily routines, maintain focus, and track spiritual consistency with zero friction.
+**Align** is a mindful daily companion designed to help users build meaningful daily routines, maintain focus, and track spiritual consistency with zero friction. It is completely FREE!!! You don't have to pay a dime. In case you want to donate you can do it through BKASH.
 
 [![Latest Release](https://img.shields.io/github/v/release/ahnaftaieb/Align-app?style=for-the-badge&logo=github&color=0969da)](https://github.com/ahnaftaieb/Align-app/releases/latest)
 [![Download APK](https://img.shields.io/badge/Download_APK-v1.0.1-brightgreen.svg?style=for-the-badge&logo=android)](https://github.com/ahnaftaieb/Align-app/releases/latest)
