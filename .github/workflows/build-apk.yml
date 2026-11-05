@@ -2,34 +2,67 @@ name: Build & Release APK
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - master
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Release Tag Version (e.g. v1.0.1)'
+        required: false
+        default: 'v1.0.1'
+
+permissions:
+  contents: write
 
 jobs:
   build:
+    name: Build Android APK
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v5
 
-      - name: Set up Java
+      - name: Set up Java 17
         uses: actions/setup-java@v5
         with:
-          distribution: 'temurin'
           java-version: '17'
+          distribution: 'temurin'
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+      - name: Setup Android SDK (API 36)
+        uses: android-actions/setup-android@v4
         with:
-          channel: 'stable'
+          packages: 'platforms;android-36 platform-tools'
 
-      - name: Accept Android Licenses & Install SDK 36
-        uses: android-actions/setup-android@v3
+      - name: Ensure Debug Keystore and Environment
+        run: |
+          touch .env
+          if [ ! -f "debug.keystore" ]; then
+            echo "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" | base64 -d > debug.keystore || \
+            keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+          fi
+          chmod +x gradlew
+
+      - name: Build Debug APK with Gradle Wrapper
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: Upload APK as Workflow Artifact
+        uses: actions/upload-artifact@v4
         with:
-          packages: 'platforms;android-36 build-tools;34.0.0'
+          name: align-app-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
 
-      - name: Make Gradlew Executable
-        run: chmod +x android/gradlew || chmod +x gradlew
-
-      - name: Build APK
-        run: flutter build apk --release
+      - name: Publish GitHub Release Asset
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'workflow_dispatch'
+        with:
+          tag_name: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || inputs.tag_name || 'v1.0.1' }}
+          name: Release ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || inputs.tag_name || 'v1.0.1' }}
+          files: app/build/outputs/apk/debug/app-debug.apk
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
