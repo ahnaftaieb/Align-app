@@ -2,6 +2,11 @@
 
 **Align** is a mindful daily companion designed to help users build meaningful daily routines, maintain focus, and track spiritual consistency with zero friction.
 
+[![Latest Release](https://img.shields.io/github/v/release/ahnaftaieb/Align-app?style=for-the-badge&logo=github&color=0969da)](https://github.com/ahnaftaieb/Align-app/releases/latest)
+[![Download APK](https://img.shields.io/badge/Download_APK-v1.0.1-brightgreen.svg?style=for-the-badge&logo=android)](https://github.com/ahnaftaieb/Align-app/releases/latest)
+[![Total Downloads](https://img.shields.io/github/downloads/ahnaftaieb/Align-app/total?style=for-the-badge&logo=googleplay&label=Downloads&color=34a853)](https://github.com/ahnaftaieb/Align-app/releases)
+[![bKash Support](https://img.shields.io/badge/bKash-01716259459-e2136e?style=for-the-badge&logo=cashapp&logoColor=white)](#support-the-project)
+
 ---
 
 ## Key Features
@@ -87,6 +92,20 @@ To push a new reflection or announcement to all users:
 3. Allow Gradle to sync dependencies automatically.
 4. Connect an Android device or launch an Android emulator.
 5. Click **Run** (`Shift + F10`) or select **Build > Build Bundle(s) / APK(s) > Build APK(s)**.
+
+---
+
+## Support the Project
+
+If **Align** has helped you build better routines, maintain deep focus, or stay consistent with daily habits and prayers, you can support future updates and development:
+
+### 🇧🇩 Support via bKash
+
+| Method | Number | Type | Reference |
+| :--- | :--- | :--- | :--- |
+| **bKash** | `01716259459` | Personal (Send Money) | `Align` |
+
+> *Thank you for your support! Every contribution helps keep Align independent, ad-free, and actively developed.*
 
 ---
 
