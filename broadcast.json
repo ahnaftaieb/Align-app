@@ -1,15 +1,17 @@
 {
   "version": "1.0.1",
-  "updated_at": "2026-11-04",
+  "updated_at": "2026-11-06",
   "broadcast": {
-    "id": "align-broadcast-001",
+    "id": "align-broadcast-005",
     "enabled": true,
-    "badge": "Daily Reflection",
-    "title": "Consistency in Small Steps",
-    "message": "The most beloved deeds to Allah are those that are consistent, even if they are small. (Sahih al-Bukhari 6465)",
-    "action_label": "Open Salat Matrix",
+    "start_date": "2026-11-05",
+    "expires_at": "2026-11-20T23:59:59Z",
+    "badge": "Update v1.0.1 Available",
+    "title": "New Version Ready to Download",
+    "message": "Align v1.0.1 is now released with fixes and improvements! Tap to download the update.",
+    "action_label": "Download Update",
     "action_tab": "salat",
-    "action_url": "",
+    "action_url": "https://github.com/ahnaftaieb/Align-app/releases",
     "priority": "normal"
   },
   "announcements": [
