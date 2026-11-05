@@ -254,6 +254,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setupNotificationChannels()
         requestNotificationPermission()
+        handleNotificationPayload(intent)
 
         onBackPressedDispatcher.addCallback(this, object : androidx.activity.OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -294,9 +295,42 @@ class MainActivity : ComponentActivity() {
         activeWebView?.onPause()
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        activeWebView?.saveState(outState)
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        handleNotificationPayload(intent)
+    }
+
+    private fun handleNotificationPayload(intent: Intent?) {
+        if (intent == null) return
+        var targetUrl: String? = intent.getStringExtra("url")
+            ?: intent.getStringExtra("update_url")
+            ?: intent.getStringExtra("link")
+            ?: intent.getStringExtra("download_url")
+            ?: intent.getStringExtra("download")
+            ?: intent.dataString
+
+        if (targetUrl.isNullOrBlank() && intent.extras != null) {
+            val bundle = intent.extras
+            for (key in bundle!!.keySet()) {
+                val value = bundle.get(key)?.toString()?.trim()
+                if (value != null && (value.startsWith("http://") || value.startsWith("https://"))) {
+                    targetUrl = value
+                    break
+                }
+            }
+        }
+
+        if (!targetUrl.isNullOrBlank()) {
+            try {
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(targetUrl)).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                startActivity(browserIntent)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 }
 
@@ -314,6 +348,10 @@ class WebAppInterface(
                     connectTimeout = 3500
                     readTimeout = 3500
                     instanceFollowRedirects = true
+                    useCaches = false
+                    defaultUseCaches = false
+                    setRequestProperty("Cache-Control", "no-cache, no-store, must-revalidate")
+                    setRequestProperty("Pragma", "no-cache")
                     setRequestProperty("User-Agent", "Mozilla/5.0 (Linux; Android) AlignApp/1.0")
                     setRequestProperty("Accept", "application/json, text/plain, */*")
                 }

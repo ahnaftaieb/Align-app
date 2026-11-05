@@ -1,23 +1,24 @@
 {
   "version": "1.0.1",
-  "updated_at": "2026-11-04",
+  "updated_at": "2026-11-05",
   "broadcast": {
-    "id": "align-broadcast-001",
+    "id": "align-update-v1-0-1",
     "enabled": true,
-    "badge": "Daily Reflection",
-    "title": "Consistency in Small Steps",
-    "message": "The most beloved deeds to Allah are those that are consistent, even if they are small. (Sahih al-Bukhari 6465)",
-    "action_label": "Open Salat Matrix",
-    "action_tab": "salat",
-    "action_url": "",
-    "priority": "normal"
+    "start_date": "2026-11-05",
+    "expires_at": "2026-11-20T23:59:59Z",
+    "badge": "Update v1.0.1 Available",
+    "title": "New Version Ready to Download",
+    "message": "Align v1.0.1 is now released with fixes and improvements! Tap to download the update.",
+    "action_label": "Download Update",
+    "action_url": "https://github.com/ahnaftaieb/Align-app/releases/tag/v1.0.1",
+    "priority": "high"
   },
   "announcements": [
     {
-      "id": "announcement-welcome",
-      "date": "2026-11-03",
-      "title": "Welcome to Align v1.0",
-      "body": "Track your 5 daily prayers, deep focus sessions, and daily habits with offline privacy and continuous streak protection."
+      "id": "announcement-v101",
+      "date": "2026-11-05",
+      "title": "Align v1.0.1 Released",
+      "body": "Download the latest APK directly from GitHub Releases for new updates and fixes."
     }
   ]
 }

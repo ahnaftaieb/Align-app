@@ -9473,11 +9473,11 @@
     function handleBroadcastAction() {
       if (!State.currentBroadcast) return;
       const b = State.currentBroadcast;
-      if (b.action_tab) {
-        changeTab(b.action_tab);
-      } else if (b.action_url) {
-        if (window.Android && typeof window.Android.openExternalUrl === 'function') {
-          window.Android.openExternalUrl(b.action_url);
+      if (b.action_url) {
+        if (window.AndroidApp && typeof window.AndroidApp.openExternalUrl === 'function') {
+          window.AndroidApp.openExternalUrl(b.action_url);
+        } else if (window.Android && typeof window.Android.openExternalUrl === 'function') {
+          window.AndroidApp.openExternalUrl(b.action_url);
         } else {
           try {
             window.open(b.action_url, '_blank');
@@ -9485,6 +9485,8 @@
             window.location.href = b.action_url;
           }
         }
+      } else if (b.action_tab) {
+        changeTab(b.action_tab);
       }
     }
 
@@ -9508,24 +9510,43 @@
       let data = null;
       let usedFallback = false;
 
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 4500);
-
-      try {
-        const res = await fetch(targetUrl, {
-          cache: 'no-store',
-          signal: controller.signal
-        });
-        clearTimeout(timeoutId);
-        if (res.ok) {
-          data = await res.json();
-          localStorage.setItem('hs_last_broadcast_snapshot', JSON.stringify(data));
-        } else {
-          throw new Error('HTTP ' + res.status);
+      // Try native bridge first to avoid WebView CORS or cache
+      if (isRemote) {
+        try {
+          let raw = '';
+          if (window.AndroidApp && typeof window.AndroidApp.fetchUrl === 'function') {
+            raw = window.AndroidApp.fetchUrl(targetUrl);
+          } else if (window.Android && typeof window.Android.fetchUrl === 'function') {
+            raw = window.Android.fetchUrl(targetUrl);
+          }
+          if (raw && raw.trim().startsWith('{')) {
+            data = JSON.parse(raw);
+            localStorage.setItem('hs_last_broadcast_snapshot', JSON.stringify(data));
+          }
+        } catch (e) {
+          console.warn('Native fetchUrl error, falling back to fetch():', e);
         }
-      } catch (err) {
-        clearTimeout(timeoutId);
-        const cached = localStorage.getItem('hs_last_broadcast_snapshot');
+      }
+
+      if (!data) {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 4500);
+
+        try {
+          const res = await fetch(targetUrl, {
+            cache: 'no-store',
+            signal: controller.signal
+          });
+          clearTimeout(timeoutId);
+          if (res.ok) {
+            data = await res.json();
+            localStorage.setItem('hs_last_broadcast_snapshot', JSON.stringify(data));
+          } else {
+            throw new Error('HTTP ' + res.status);
+          }
+        } catch (err) {
+          clearTimeout(timeoutId);
+          const cached = localStorage.getItem('hs_last_broadcast_snapshot');
         if (cached) {
           try {
             data = JSON.parse(cached);
@@ -9556,11 +9577,22 @@
         const b = data.broadcast;
         State.currentBroadcast = b;
 
+        let isTimeActive = true;
+        const now = Date.now();
+        if (b.expires_at) {
+          const expTime = new Date(b.expires_at).getTime();
+          if (!isNaN(expTime) && now > expTime) isTimeActive = false;
+        }
+        if (b.start_date || b.start_at) {
+          const startTime = new Date(b.start_date || b.start_at).getTime();
+          if (!isNaN(startTime) && now < startTime) isTimeActive = false;
+        }
+
         const isDismissed = State.dismissedBroadcastIds.includes(b.id);
         const banner = document.getElementById('broadcast-banner-container');
 
         if (banner) {
-          if (b.enabled !== false && !isDismissed && State.salatModuleActive !== false) {
+          if (b.enabled !== false && isTimeActive && !isDismissed && State.salatModuleActive !== false) {
             const badgeEl = document.getElementById('broadcast-badge-pill');
             const sourceEl = document.getElementById('broadcast-source-tag');
             const titleEl = document.getElementById('broadcast-title');
